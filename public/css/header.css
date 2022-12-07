@@ -77,7 +77,7 @@ header nav {
         position: absolute;
         padding: 0 20px;
         right:20px;
-    } 
+    }
     header nav.menu_aberto ~ #btn_abre_fecha_menu_mobile {
         position: fixed;
     }
@@ -88,7 +88,7 @@ header nav {
         border-radius:3px;
         position: relative;
         transition: .2s;
-    } header nav.menu_fechado + button .btn_hamburguer_cross::after, 
+    } header nav.menu_fechado + button .btn_hamburguer_cross::after,
       header nav.menu_fechado + button .btn_hamburguer_cross::before {
         content: '';
         height:2px;
@@ -114,5 +114,6 @@ header nav {
         transform: rotate(90deg);
         bottom:0;
         top:0;
+        
     }
 }
