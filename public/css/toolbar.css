@@ -1,0 +1,70 @@
+.toolbar {
+    margin-bottom: 1em;
+}
+.toolbar .container {
+    height: 80px;
+    background-color: var(--cor_branco);
+    border-radius: .5em;
+    box-shadow: 0 1em 1em -1em var(--cor_escuro_25);
+    align-items:center;
+    justify-content: space-between;
+    padding: 0 .5em;
+}
+
+#btn_acessa_filtros_mobile {
+    display: none;
+}
+
+/* Estilização Dispositivos Mobile */
+@media (max-width: 650px) {
+    #btn_acessa_filtros_mobile {
+        height: 60px;
+        width: 60px;
+        border-radius: var(--perc_6);
+        background-color: var(--cor_primaria);
+        color: var(--cor_branco);
+        display: grid;
+        position: absolute;
+        right: 1em;
+        z-index:1;
+        transition: .3s;
+    }
+
+    .toolbar .container {
+        transition: .4s;
+        position:fixed;
+        height: 40vh;
+        justify-content: space-around;
+        z-index: 1;
+        flex-direction: column;
+        padding: 0 4em;
+        left: 50%;
+        transform: translateX(-50%);
+        width: var(--perc_11);
+        box-shadow: 0 -10px 15px var(--cor_suave_25);
+    }
+    .toolbar .container.menu_fechado {
+        bottom:-45%
+    }
+    .toolbar .container.menu_aberto {
+        bottom: 0;
+    }
+    .toolbar .container.menu_fechado #btn_acessa_filtros_mobile {
+        top: -7.5em;
+    }
+    .toolbar .container.menu_aberto #btn_acessa_filtros_mobile {
+        top: -3em;
+    }
+
+    .toolbar .container_campo {
+        width:var(--perc_full);
+        justify-content: space-between;
+        margin-bottom: 1em;
+    }
+    .toolbar .container.menu_aberto ~ #btn_acessa_filtros_mobile  {
+        background-color: var(--cor_primaria);
+        color: var(--cor_branco);
+        bottom: calc(40vh - 30px)
+    }
+
+}

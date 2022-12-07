@@ -1,0 +1,148 @@
+@import url(./header.css);
+@import url(./logotipo.css);
+@import url(./toolbar.css);
+@import url(./campo.css);
+@import url(./produto.css);
+@import url(./galeria.css);
+@import url(./modal_produto.css);
+@import url(./footer.css);
+@import url(./card.css);
+@import url(./lista_consulta.css);
+@import url(./mensagem.css);
+
+/* Importação da Fonte do Estilo Global*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;500;600;700&display=swap');
+
+* {
+    padding:0;
+    margin:0;
+    box-sizing:border-box;
+    font-weight: 600;
+    /*Definição da Fonte do Estilo Global*/
+    font-family: 'Poppins', sans-serif;
+}
+
+dialog {margin: auto;}
+
+button, input {
+    border:none;
+    background: transparent;
+    outline:none;
+}
+
+body {
+    background-color: var(--cor_base);
+    max-width: 100vw;
+    max-height: 100vh;
+    overflow-x: hidden;
+    font-size: 12px;
+}
+
+ a { text-decoration: none; }
+
+:root {
+    --cor_base: #f6f6f6;
+    --cor_branco: #ffffff;
+    --cor_primaria_rgb: 143, 22, 186; /* Alterar cor primária, colocar o código RGB aqui*/
+    --cor_primaria: rgba(var(--cor_primaria_rgb));
+    --cor_primaria_50: rgba(var(--cor_primaria_rgb),.5);
+    --cor_primaria_25:rgba(var(--cor_primaria_rgb),.25);
+    --cor_escuro:#181818;
+    --cor_escuro_50:#18181894;
+    --cor_escuro_25:#18181818;
+    --cor_suave:#686868;
+    --cor_suave_50:#6868688c;
+    --cor_suave_25:#68686815;
+    --cor_sucesso:#2bc368;
+    --cor_sucesso_25:#2bc36828;
+    --cor_alerta:#dbd818;
+    --cor_alerta_25:#dbd81842;
+    --cor_erro:crimson;
+    --cor_erro_25:#dc143c34;
+    --cor_suave_rgb: 0,0,0;
+
+    --perc_1 : 8.33%;
+    --perc_2 : 16.66%;
+    --perc_3 : 25%;
+    --perc_4 : 33.33%;
+    --perc_5 : 41.66%;
+    --perc_6 : 50%;
+    --perc_7 : 58.33%;
+    --perc_8 : 66.66%;
+    --perc_9 : 75%;
+    --perc_10: 83.33%;
+    --perc_11: 91.66%;
+    --perc_full: 100%;
+}
+
+.container {
+    margin: 0 auto;
+    width: var(--perc_8);
+    height: var(--perc_full);
+}
+
+@media (max-width: 1200px) {
+    .container{
+        width: var(--perc_11);
+    }
+}
+
+::-webkit-scrollbar {
+    width: .5em;
+    background-color: transparent;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+    background: var(--cor_suave_25);
+}
+::-webkit-scrollbar-thumb {
+    background-color: var(--cor_suave_50);
+    border-radius:.5em;
+}
+
+.flex_row {
+    display: flex;
+    flex-direction: row;
+}
+.flex_col {
+    display:flex;
+    flex-direction: column;
+}
+
+.centralize_item {
+    display: grid;
+    place-items: center;
+}
+
+.col_1  {width: var(--perc_1);}
+.col_2  {width: var(--perc_2);}
+.col_3  {width: var(--perc_3);}
+.col_4  {width: var(--perc_4);}
+.col_5  {width: var(--perc_5);}
+.col_6  {width: var(--perc_6);}
+.col_7  {width: var(--perc_7);}
+.col_8  {width: var(--perc_8);}
+.col_9  {width: var(--perc_9);}
+.col_10 {width: var(--perc_10);}
+.col_11 {width: var(--perc_11);}
+.col_12 {width: var(--perc_full);}
+
+.titulo_grande {
+    font-size:2em
+}
+.titulo_medio {
+    font-size: 1.5em
+}
+.titulo_pequeno {
+    font-size:1em;
+}
+
+.cor_escuro {
+    color: var(--cor_escuro);
+}
+.cor_escuro_50 {
+    color: var(--cor_escuro_50)
+}
+.cor_escuro_25 {
+    color: var(--cor_escuro_25);
+}

@@ -1,0 +1,105 @@
+.produto {
+    min-width: 200px;
+    width:var(--perc_full);
+    height: 400px;
+    background: var(--cor_branco);
+    border-radius: .5em;
+    /* overflow: hidden; */
+    position: relative;
+    user-select: none;
+    box-shadow: 0 5px 5px var(--cor_suave_25);
+    transition: .4s;
+} .produto:hover {
+    transform: translateY(-5px);
+}
+
+.produto_imagem {
+    border-radius: .5em .5em 0 0;
+    height: var(--perc_7);
+    width: var(--perc_full);
+    background-color: var(--cor_branco);
+    overflow: hidden;
+} .produto_imagem img {
+    width: 100%;
+    height:100%;
+    object-fit: cover;
+}
+.produto_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: .8em;
+    height: var(--perc_5);
+}
+.produto_nome {
+    color: var(--cor_suave);
+    font-weight: bold;
+    font-size: 1.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: var(--perc_4);
+}
+.produto_descricao {
+    color: var(--cor_suave_50);
+    font-weight: 400;
+    font-size: 1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: var(--perc_4);
+    white-space: nowrap;
+}
+.produto_valor {
+    height: var(--perc_4);
+    color: var(--cor_sucesso);
+    font-weight: bold;
+    width:var(--perc_6);
+    font-size: 1.5em;
+}
+.produto_acesso {
+    text-decoration: none;
+    width:var(--perc_6);
+    padding: 1em;
+    background-color: rgba(var(--cor_primaria_rgb),.1);
+    color:var(--cor_primaria);
+    border-radius: .05em;
+    transform: translateX(100%);
+    transition: .2s ease-in-out;
+    font-size:1.2em;
+    border-radius: 1em;
+    cursor:pointer;
+}
+.produto:hover .produto_acesso {
+    transform: translateX(0);
+}
+.produto footer {
+    background: transparent;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--perc_4);
+}
+
+.produto_categoria {
+    padding: .5em;
+    border-radius: 0 .5em 0 .5em;
+    background-color: var(--cor_primaria);
+    text-align: center;
+    min-width: var(--perc_4);
+    width: max-content;
+    position: absolute;
+    right: -.5em;
+    color: var(--cor_branco);
+    font-size:1.3em;
+    margin-bottom: 1em;
+} .produto_categoria::after {
+    content: '';
+    z-index: -1;
+    height: 1em;
+    width: 1em;
+    position: absolute;
+    bottom:-.5em;
+    right: 4px;
+    transform: rotate(45deg);
+    background-color: var(--cor_primaria_50);
+}

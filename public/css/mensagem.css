@@ -1,0 +1,46 @@
+
+.mensagem {
+    height: 80px;
+    line-height: 80px;
+    background: var(--cor_branco);
+    min-width:250px;
+    position: relative;
+    text-align: center;
+    padding-left:1em;
+    position:fixed;
+    right: 0;
+    top:50%;
+    z-index:2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-shadow: 0 5px 10px var(--cor_suave_25);
+    animation: msgIn 1s;
+    cursor:pointer;
+} .mensagem::before {
+    content: '';
+    height: var(--perc_full);
+    width:5px;
+    background: var(--cor_primaria);
+    position: absolute;
+    left:0;
+}
+.mensagem.esconde {
+    animation: msgOut 1s;
+}
+
+@keyframes msgIn {
+    from {
+        opacity: 0;
+        right: -100%;
+    }
+    to {
+        opacity: 1;
+        right: 0%;
+    }
+}
+@keyframes msgOut {
+    to {
+        opacity: 0;
+        right: -100%;
+    }
+}

@@ -1,0 +1,82 @@
+.container_campo {
+    min-width: 250px;
+    height: 3.5em;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    border: 2px solid var(--cor_suave_25);
+    border-radius: .5em;
+    color: var(--cor_suave_50);
+}
+
+.campo_label {
+    background: var(--cor_suave_25);
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.campo {
+    width: calc(var(--perc_full) - var(--perc_3));
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.campo :first-child {
+    height: var(--perc_full);
+    width:var(--perc_full);
+}
+
+.campo_acao {
+    background: var(--cor_suave_25);
+    color: var(--cor_suave_50);
+    cursor: pointer;
+    width: var(--perc_3);
+    transition: .4s;
+} .campo_acao:hover {
+    color: var(--cor_suave);
+}
+
+.container_campo [class^="campo"] {
+    height: var(--perc_full);
+    line-height:calc(3.5em - 4px);
+    padding: 0 .3em;
+} 
+
+.campo select {
+    outline: none;
+    appearance: none;
+    border: none;
+    background: none;
+    color: var(--cor_suave_50);
+    text-align: center;
+}
+
+.campo input {
+    padding:0 .5em;
+    color: var(--cor_suave_50);
+}.campo input::-webkit-input-placeholder {
+    color: var(--cor_suave_50);
+}
+
+.campo a {
+    color: var(--cor_suave);
+}
+
+.campo textarea {
+    outline: none;
+    border:none;
+    padding:5px;
+    color:var(--cor_suave_50);
+    resize: none;
+} textarea::placeholder {
+    color: var(--cor_suave_50)
+}
+
+.campo input[type="file"]::-webkit-file-upload-button {
+    border: 2px dashed var(--cor_suave_25);
+    background: transparent;
+    color: var(--cor_suave_50);
+    height:var(--perc_10);
+    font-family: 'Poppins', sans-serif;
+}
+
+
