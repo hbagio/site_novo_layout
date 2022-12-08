@@ -88,7 +88,7 @@ class ProdutoController extends Controller
         $whatsapp =  $retorno[0];
         $numero =   preg_replace('/[^0-9]/', '', $whatsapp->whatsapp);
         $url = 'https://wa.me/55' . $numero;
-        
+
         return Array(
             'nome' => $produto->nome,
             'descricao' => $produto->descricao,

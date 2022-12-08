@@ -40,6 +40,7 @@
     background: transparent;
     flex-direction: column;
     width: var(--perc_full);
+    height: max-content;
 }
 
 .modal_produto_nome {
