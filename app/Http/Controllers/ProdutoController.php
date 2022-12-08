@@ -15,7 +15,12 @@ class ProdutoController extends Controller
     public function index()
     {
         //pega os dados do model
-        $produtos  = Produto::all();
+        $produtos  = DB::select('select produtos.*,
+                                        categorias.descricao as descricaoCategoria
+                                from produtos
+                                inner join categorias on
+                                produtos.idcategoria = categorias.id
+                                where idcategoria  >= ?', [0]);
         $categoria = Categoria::all();
         //retorna para aviwe
         return view('welcome', ['produtos' =>  $produtos, 'categorias' => $categoria]);
@@ -45,7 +50,7 @@ class ProdutoController extends Controller
         $produto->nome = $request->identificacao;
         if ($request->valor > 0) {
             $produto->valor = $request->valor;
-        }else{
+        } else {
             $produto->valor = 0;
         }
 
@@ -80,7 +85,8 @@ class ProdutoController extends Controller
         return view('events.visualizarProduto', ['produto' => $produto, 'categoria' => $categoria, 'url' => $url]);
     }
 
-    public function getDadosProduto($id) {
+    public function getDadosProduto($id)
+    {
         $produto   = Produto::findOrFail($id);
         $categoria = Categoria::findOrFail($produto->idcategoria);
 
@@ -89,11 +95,11 @@ class ProdutoController extends Controller
         $numero =   preg_replace('/[^0-9]/', '', $whatsapp->whatsapp);
         $url = 'https://wa.me/55' . $numero;
 
-        return Array(
+        return array(
             'nome' => $produto->nome,
             'descricao' => $produto->descricao,
-            'valor' => ($produto->valor > 0) ? "R$ ".number_format($produto->valor, 2, ',') : 'À Combinar',
-            'imagem' => "/img/produtos/".$produto->imagem,
+            'valor' => ($produto->valor > 0) ? "R$ " . number_format($produto->valor, 2, ',') : 'À Combinar',
+            'imagem' => "/img/produtos/" . $produto->imagem,
             'categoria' => $categoria->descricao,
             'urlContato' => $url
         );
@@ -102,9 +108,19 @@ class ProdutoController extends Controller
     public function buscaComCategoria(Request $request)
     {
         if ($request->categoriaSelect > 0) {
-            $produtos = DB::select('select * from produtos where idcategoria  = ?', [$request->categoriaSelect]);
+            $produtos = DB::select('Select produtos.*,
+                                        categorias.descricao as descricaoCategoria
+                                    from produtos
+                                    inner join categorias on
+                                    produtos.idcategoria = categorias.id
+                                    where idcategoria  = ?', [$request->categoriaSelect]);
         } else {
-            $produtos = DB::select('select * from produtos where idcategoria  >= ?', [0]);
+            $produtos = DB::select('select produtos.*,
+                                           categorias.descricao as descricaoCategoria
+                                    from produtos
+                                    inner join categorias on
+                                        produtos.idcategoria = categorias.id
+                                    where idcategoria  >= ?', [0]);
         }
 
         $categoria = Categoria::all();
@@ -120,7 +136,7 @@ class ProdutoController extends Controller
         $produtos  = Produto::all();
         $categoria = Categoria::all();
         //retorna para aviwe
-        return redirect('events/listarProduto')->with('msg','Produto excluido com sucesso!');
+        return redirect('events/listarProduto')->with('msg', 'Produto excluido com sucesso!');
     }
 
 
