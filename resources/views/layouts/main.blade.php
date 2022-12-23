@@ -15,6 +15,7 @@
             {{-- Font Awesome --}}
                 <script src="https://kit.fontawesome.com/dbe0b3e2fa.js" crossorigin="anonymous"></script>
             {{-- Google Analitycs --}}
+            
                 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8DD2ZC910C"></script>
                 <script>
                     window.dataLayer = window.dataLayer || [];
@@ -24,6 +25,9 @@
                     gtag('js', new Date());
                     gtag('config', 'G-8DD2ZC910C');
                 </script>
+
+
+
                 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-242749656-1"></script>
                 <script>
                     window.dataLayer = window.dataLayer || [];
@@ -35,7 +39,7 @@
                 </script>
     </head>
     <body>
-    
+
         @include('/components/header')
         @if (session('msg'))
             @include('/components/mensagem', ['isVisivelInicialmente' => true, 'mensagem' => session('msg')])
