@@ -17,6 +17,7 @@ use Illuminate\Database\Query\Expression;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Response;
 use Symfony\Component\VarDumper\VarDumper;
 
 class UserController extends Controller
@@ -123,12 +124,12 @@ class UserController extends Controller
 
     public function recuperaSenhaUsuario(Request $request)
     {
-        $contUsuariosEmail = DB::select('select count(1) as contador from users where UPPER(email) =? ', [strtoupper($request->email)]);
+        /* $contUsuariosEmail = \DB::select('select count(1) as contador from users where UPPER(email) =? ', [strtoupper($request->email)]);
         if ($contUsuariosEmail[0]->contador == 0) {
             return redirect('/recuperacaoSenha')->with('msgError', 'Não existe Usuário cadastrado para este email! Entre em Contado com o Administrador');
         } else {
             $senhaNova = $this->stringAleatoria(7);
-            $idUser = DB::select('select id from users where UPPER(email) =? ', [strtoupper($request->email)]);
+            $idUser = \DB::select('select id from users where UPPER(email) =? ', [strtoupper($request->email)]);
             $usuario = User::findOrFail($idUser[0]->id);
             $usuario->password = bcrypt($senhaNova);
             $usuario->save();
@@ -136,21 +137,23 @@ class UserController extends Controller
             //Enviar o email
             $usuario->notify(new emailRecuperacaoSenha($usuario));
             return new \App\Mail\emailRecuperarSenha($request->email, $textoEnvio);
-        }
+        }*/
+        return view('events.login');
     }
     //Rota chamado por ajax
     public function validaEmailUsuario(Request $request)
     {
-        $contUsuariosEmail = DB::select('select count(1) as contador from users where UPPER(email) =? ', [strtoupper($request->email)]);
+        $contUsuariosEmail = \DB::select('select count(1) as contador from users where UPPER(email) =? ', [strtoupper($request->email)]);
 
-        $retorno['emailValido'] = false;
-        $retorno['mensagem'   ] = 'Não existe Usuário cadastrado para este email! Entre em Contado com o Administrador';
-
-        if ((current($contUsuariosEmail)->contador) > 0) {
+        if ($contUsuariosEmail[0]->contador == 0) {
+            $retorno['emailValido'] = false;
+            $retorno['mensagem'] = 'Usuário não Encontrado! Contate o Administrador';
+        } else {
             $retorno['emailValido'] = true;
-            $retorno['mensagem'   ] = 'Ok existe Usuário cadastrado para este email! Entre em Contado com o Administrador';
+            $retorno['mensagem'] = 'Usuário encontrado para este email!';
         }
-        echo json_encode($retorno);
+        return Response::json($retorno);
+
     }
 
     public function stringAleatoria($size)

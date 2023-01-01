@@ -16,8 +16,9 @@ rotasUsuarioAutenticado();
 /**
  * Rota(s) para quando o Usuário estiver Autenticado (Auth).
  */
-function rotasUsuarioAutenticado() {
-    Route::group(['middleware' => ['auth']], function() {
+function rotasUsuarioAutenticado()
+{
+    Route::group(['middleware' => ['auth']], function () {
         rotasMenuGerenciamento();
         rotasMenuSair();
     });
@@ -26,8 +27,9 @@ function rotasUsuarioAutenticado() {
 /**
  * Rota(s) para quando o Usuário não estiver Autenticado, ou seja, for Convidado (Guest).
  */
-function rotasUsuarioConvidado() {
-    Route::group(['middleware' => ['guest']], function() {
+function rotasUsuarioConvidado()
+{
+    Route::group(['middleware' => ['guest']], function () {
         rotasMenuLogin();
     });
 }
@@ -35,42 +37,50 @@ function rotasUsuarioConvidado() {
 /**
  * Rota(s) das Redes Sociais.
  */
-function rotasRedesSociais() {
-    Route::get('/whatsapp' , [GerenciamentoController::class, 'whatsapp' ]);
+function rotasRedesSociais()
+{
+    Route::get('/whatsapp', [GerenciamentoController::class, 'whatsapp']);
     Route::get('/instagram', [GerenciamentoController::class, 'instagram']);
-    Route::get('/facebook' , [GerenciamentoController::class, 'facebook' ]);
+    Route::get('/facebook', [GerenciamentoController::class, 'facebook']);
 }
 
 /**
  * Rotas(s) do Menu HOME.
  */
-function rotasMenuHome() {
-    Route::get ('/'                    , [ProdutoController::class, 'index'            ])->name('home');
-    Route::post('/p'                   , [ProdutoController::class, 'buscaComCategoria'])->name('home.ajax.filtraCategoria');
-    Route::get ('/getDadosProduto/{id}', [ProdutoController::class, 'getDadosProduto'  ])->name('home.ajax.getDadosProduto');
+function rotasMenuHome()
+{
+    Route::get('/', [ProdutoController::class, 'index'])->name('home');
+    Route::post('/p', [ProdutoController::class, 'buscaComCategoria'])->name('home.ajax.filtraCategoria');
+    Route::get('/getDadosProduto/{id}', [ProdutoController::class, 'getDadosProduto'])->name('home.ajax.getDadosProduto');
     // Route::get('/events/detalhes/{id}', [ProdutoController::class, 'show']);
 }
 
 /**
  * Rotas(s) do Menu SOBRE.
  */
-function rotasMenuSobre() {
+function rotasMenuSobre()
+{
     Route::get('/events/sobre', [GerenciamentoController::class, 'sobre'])->name('sobre');
 }
 /**
  * Rotas(s) do Menu LOGIN.
  */
-function rotasMenuLogin() {
-    Route::get ('/usuario'                    , [UserController::class, 'index'              ])->name('login'                     );
-    Route::post('/login'                      , [UserController::class, 'login'              ])->name('login.logado'              );
-    Route::get ('/recuperacaoSenha'           , [UserController::class,'recuperacaoSenha'    ])->name('login.recuperaSenha'       );
-    Route::post('/events/recuperaSenhaUsuario', [UserController::class,'recuperaSenhaUsuario'])->name('login.recuperaSenhaUsuario');
-    Route::post('/events/validaEmailUsuario'  , [UserController::class,'validaEmailUsuario'  ])->name('login.validaEmail'         );
+function rotasMenuLogin()
+{
+    Route::get('/usuario', [UserController::class, 'index'])->name('login');
+    Route::post('/login', [UserController::class, 'login'])->name('login.logado');
+    Route::get('/recuperacaoSenha', [UserController::class, 'recuperacaoSenha'])->name('login.recuperaSenha');
+    Route::post('/events/recuperaSenhaUsuario', [UserController::class, 'recuperaSenhaUsuario'])->name('login.recuperaSenhaUsuario');
+    //Route::post('/events/validaEmailUsuario', [UserController::class, 'validaEmailUsuario'])->name('login.validaEmail');
+    //Rota get quando evento é pelo botão
+    Route::get('/events/validaEmailUsuario', [UserController::class, 'validaEmailUsuario'])->name('login.validaEmail');
+    //Route::post('/events/validaEmailUsuarioAjax', [UserController::class, 'validaEmailUsuario']);
 }
 /**
  * Rotas(s) do Menu GERENCIAMENTO.
  */
-function rotasMenuGerenciamento() {
+function rotasMenuGerenciamento()
+{
     Route::get('/events/gerenciamento', [GerenciamentoController::class, 'gerenciamento'])->name('gerenciamento.dashboard');
     rotasCategoria();
     rotasProduto();
@@ -81,50 +91,55 @@ function rotasMenuGerenciamento() {
 /**
  * Rotas(s) do Menu SAIR.
  */
-function rotasMenuSair() {
+function rotasMenuSair()
+{
     Route::get('/logout', [UserController::class, 'logout'])->name('sair');
 }
 
 /**
  * Rota(s) de Categoria.
  */
-function rotasCategoria() {
-    Route::get ('/events/cadastroCategoria'    , [CategoriaController::class, 'cadastroCategoria'])->name('gerenciamento.categoria'                  );
-    Route::post('/events/insereCategoria'      , [CategoriaController::class, 'store'            ])->name('gerenciamento.categoria.insere'           );
-    Route::get ('/events/excluirCategoria/{id}', [CategoriaController::class, 'delete'           ])->name('gerenciamento.categoria.deleta'           );
-    Route::post('/events/updateCategoria'      , [CategoriaController::class, 'update'           ])->name('gerenciamento.categoria.altera'           );
-    Route::get ('/events/alterarCategoria/{id}', [CategoriaController::class, 'alterarCategoria' ])->name('gerenciamento.categoria.formulario.altera');
+function rotasCategoria()
+{
+    Route::get('/events/cadastroCategoria', [CategoriaController::class, 'cadastroCategoria'])->name('gerenciamento.categoria');
+    Route::post('/events/insereCategoria', [CategoriaController::class, 'store'])->name('gerenciamento.categoria.insere');
+    Route::get('/events/excluirCategoria/{id}', [CategoriaController::class, 'delete'])->name('gerenciamento.categoria.deleta');
+    Route::post('/events/updateCategoria', [CategoriaController::class, 'update'])->name('gerenciamento.categoria.altera');
+    Route::get('/events/alterarCategoria/{id}', [CategoriaController::class, 'alterarCategoria'])->name('gerenciamento.categoria.formulario.altera');
 }
 
 /**
  * Rota(s) de Produto.
  */
-function rotasProduto() {
-    Route::get ('/events/listarProduto'      , [ProdutoController::class, 'listarProduto'    ])->name('gerenciamento.produto'                  );
-    Route::post('/events/store'              , [ProdutoController::class, 'store'            ])->name('gerenciamento.produto.insere'           );
-    Route::get ('/events/excluirProduto/{id}', [ProdutoController::class, 'delete'           ])->name('gerenciamento.produto.deleta'           );
-    Route::post('/events/updateProduto'      , [ProdutoController::class, 'update'           ])->name('gerenciamento.produto.altera'           );
-    Route::get ('/events/cadastroProduto'    , [ProdutoController::class, 'cadastroProduto'  ])->name('gerenciamento.produto.formulario.insere');
-    Route::get ('/events/alterarProduto/{id}', [ProdutoController::class, 'alterarProduto'   ])->name('gerenciamento.produto.formulario.altera');
+function rotasProduto()
+{
+    Route::get('/events/listarProduto', [ProdutoController::class, 'listarProduto'])->name('gerenciamento.produto');
+    Route::post('/events/store', [ProdutoController::class, 'store'])->name('gerenciamento.produto.insere');
+    Route::get('/events/excluirProduto/{id}', [ProdutoController::class, 'delete'])->name('gerenciamento.produto.deleta');
+    Route::post('/events/updateProduto', [ProdutoController::class, 'update'])->name('gerenciamento.produto.altera');
+    Route::get('/events/cadastroProduto', [ProdutoController::class, 'cadastroProduto'])->name('gerenciamento.produto.formulario.insere');
+    Route::get('/events/alterarProduto/{id}', [ProdutoController::class, 'alterarProduto'])->name('gerenciamento.produto.formulario.altera');
 }
 
 /**
  * Rota(s) de Empresa.
  */
-function rotasEmpresa() {
-    Route::get ('/events/dadosEmpresa'       , [GerenciamentoController::class, 'dadosEmpresa'])->name('gerenciamento.empresa'       );
-    Route::post('/events/dadosEmpresa/store' , [GerenciamentoController::class, 'store'       ])->name('gerenciamento.empresa.insere');
-    Route::post('/events/dadosEmpresa/update', [GerenciamentoController::class, 'update'      ])->name('gerenciamento.empresa.altera');
+function rotasEmpresa()
+{
+    Route::get('/events/dadosEmpresa', [GerenciamentoController::class, 'dadosEmpresa'])->name('gerenciamento.empresa');
+    Route::post('/events/dadosEmpresa/store', [GerenciamentoController::class, 'store'])->name('gerenciamento.empresa.insere');
+    Route::post('/events/dadosEmpresa/update', [GerenciamentoController::class, 'update'])->name('gerenciamento.empresa.altera');
 }
 
 /**
  * Rota(s) de Usuário.
  */
-function rotasUsuario() {
-    Route::get ('/events/consultaUsuario'    , [UserController::class, 'consultaUsuario'  ])->name('gerenciamento.usuario'                  );
-    Route::post('events/storeUsuario'        , [UserController::class, 'store'            ])->name('gerenciamento.usuario.insere'           );
-    Route::post('/events/updateUsuario'      , [UserController::class, 'update'           ])->name('gerenciamento.usuario.altera'           );
-    Route::get ('events/excluirUsuario/{id}' , [UserController::class, 'delete'           ])->name('gerenciamento.usuario.deleta'           );
-    Route::get ('/events/alterarUsuario/{id}', [UserController::class, 'alterarUsuario'   ])->name('gerenciamento.usuario.formulario.altera');
-    Route::get ('/inserirUsuario'            , [UserController::class, 'inserirUsuario'   ])->name('gerenciamento.usuario.formulario.insere');
+function rotasUsuario()
+{
+    Route::get('/events/consultaUsuario', [UserController::class, 'consultaUsuario'])->name('gerenciamento.usuario');
+    Route::post('events/storeUsuario', [UserController::class, 'store'])->name('gerenciamento.usuario.insere');
+    Route::post('/events/updateUsuario', [UserController::class, 'update'])->name('gerenciamento.usuario.altera');
+    Route::get('events/excluirUsuario/{id}', [UserController::class, 'delete'])->name('gerenciamento.usuario.deleta');
+    Route::get('/events/alterarUsuario/{id}', [UserController::class, 'alterarUsuario'])->name('gerenciamento.usuario.formulario.altera');
+    Route::get('/inserirUsuario', [UserController::class, 'inserirUsuario'])->name('gerenciamento.usuario.formulario.insere');
 }
