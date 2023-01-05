@@ -107,21 +107,31 @@ class ProdutoController extends Controller
 
     public function buscaComCategoria(Request $request)
     {
-        if ($request->categoriaSelect > 0) {
+        $filtro_pesquisa = $request->filtro_pesquisa;
+        $categoriaSelect = $request->categoriaSelect;
+
+        if (strlen($filtro_pesquisa) > 0) {
             $produtos = DB::select('Select produtos.*,
                                         categorias.descricao as descricaoCategoria
                                     from produtos
                                     inner join categorias on
                                     produtos.idcategoria = categorias.id
-                                    where idcategoria  = ?', [$request->categoriaSelect]);
-        } else {
-            $produtos = DB::select('select produtos.*,
+                                    where nome like ?', ['%' . $filtro_pesquisa . '%']);
+        }elseif ($categoriaSelect > 0) {
+                $produtos = DB::select('Select produtos.*,
+                                        categorias.descricao as descricaoCategoria
+                                    from produtos
+                                    inner join categorias on
+                                    produtos.idcategoria = categorias.id
+                                    where idcategoria  = ?', [$categoriaSelect]);
+            } else {
+                $produtos = DB::select('select produtos.*,
                                            categorias.descricao as descricaoCategoria
                                     from produtos
                                     inner join categorias on
                                         produtos.idcategoria = categorias.id
                                     where idcategoria  >= ?', [0]);
-        }
+            }
 
         $categoria = Categoria::all();
 
