@@ -17,13 +17,9 @@ class CategoriaController extends Controller
 
     public function store(Request $request)
     {
-        if (is_null($request->descricao)) {
-            return redirect('events/cadastroCategoria')->with('msg', 'Informe a descrição da Categoria!');
-        }
-
         $categoria = new Categoria();
 
-        $categoria->descricao = $request->descricao;
+        $categoria->descricao = $request->descricaoCategoria;
 
         $categoria->save();
 

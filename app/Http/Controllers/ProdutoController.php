@@ -9,18 +9,25 @@ use App\Models\Categoria;
 use App\Models\Informacao;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\File;
+use Illuminate\Contracts\Cache\Store;
 
 class ProdutoController extends Controller
 {
     public function index()
     {
         //pega os dados do model
-        $produtos  = DB::select('select produtos.*,
-                                        categorias.descricao as descricaoCategoria
-                                from produtos
-                                inner join categorias on
-                                produtos.idcategoria = categorias.id
-                                where idcategoria  >= ?', [0]);
+        $produtos  = DB::table('produtos')
+            //Campos de deseja
+            ->select('produtos.*', 'categorias.descricao as descricaoCategoria')
+            //Join com a tabela e comparação
+            ->Join('categorias', 'categorias.id', '=', 'produtos.idcategoria')
+            //Ordenação
+            ->orderBy('destaque', 'desc')
+            //Executa
+            ->get();
+
+
         $categoria = Categoria::all();
         //retorna para aviwe
         return view('welcome', ['produtos' =>  $produtos, 'categorias' => $categoria]);
@@ -55,7 +62,9 @@ class ProdutoController extends Controller
         }
 
         $produto->descricao = $request->descricao;
+        $produto->destaque = $request->destaque;
         $produto->idcategoria = $request->categoria;
+
 
         //Upload controle
         //Verifica se tem uma imagem da requisição e se ela é valida
@@ -117,21 +126,21 @@ class ProdutoController extends Controller
                                     inner join categorias on
                                     produtos.idcategoria = categorias.id
                                     where nome like ?', ['%' . $filtro_pesquisa . '%']);
-        }elseif ($categoriaSelect > 0) {
-                $produtos = DB::select('Select produtos.*,
+        } elseif ($categoriaSelect > 0) {
+            $produtos = DB::select('Select produtos.*,
                                         categorias.descricao as descricaoCategoria
                                     from produtos
                                     inner join categorias on
                                     produtos.idcategoria = categorias.id
                                     where idcategoria  = ?', [$categoriaSelect]);
-            } else {
-                $produtos = DB::select('select produtos.*,
+        } else {
+            $produtos = DB::select('select produtos.*,
                                            categorias.descricao as descricaoCategoria
                                     from produtos
                                     inner join categorias on
                                         produtos.idcategoria = categorias.id
                                     where idcategoria  >= ?', [0]);
-            }
+        }
 
         $categoria = Categoria::all();
 
@@ -139,13 +148,10 @@ class ProdutoController extends Controller
         return view('welcome', ['produtos' => $produtos, 'categorias' => $categoria]);
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
-        $produto = Produto::findOrFail($id);
-        $produto->delete();
-        $produtos  = Produto::all();
-        $categoria = Categoria::all();
-        //retorna para aviwe
+        $produto = Produto::findOrFail($id)->delete();
+
         return redirect('events/listarProduto')->with('msg', 'Produto excluido com sucesso!');
     }
 
@@ -166,6 +172,8 @@ class ProdutoController extends Controller
         $produto->nome = $request->nome;
         $produto->valor = $request->valor;
         $produto->descricao = $request->descricao;
+        $produto->destaque = $request->destaque;
+        $produtoOld = $produto->imagem;
 
         if ($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
             $requestImage = $request->imagem;
@@ -176,6 +184,18 @@ class ProdutoController extends Controller
         }
 
         $produto->save();
+
+        //Excluir a imagem antiga
+        $path = "img/produtos/";
+        $diretorio = dir($path);
+
+        while ($arquivo = $diretorio->read()) {
+            if (strpos($arquivo,  $produtoOld) !== false) {
+                unlink($path . $arquivo);
+            }
+        }
+        $diretorio->close();
+
 
         $produtos = Produto::all();
         //retorna para aviwe

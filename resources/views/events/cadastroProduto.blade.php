@@ -26,6 +26,16 @@
             </div>
             <br>
             <div class="container_campo col_10">
+                <label class="campo_label col_3">Destaque</label>
+                <div class="campo">
+                    <select name="destaque" required>
+                            <option value="0">Não</option>
+                            <option value="1">Sim</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="container_campo col_10">
                 <label class="campo_label col_3">Valor R$</label>
                 <div class="campo">
                     <input type="number" class="form-control"name="valor" id="valor" placeholder="Valor do Produto">

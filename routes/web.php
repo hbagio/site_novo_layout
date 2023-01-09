@@ -115,7 +115,7 @@ function rotasProduto()
 {
     Route::get('/events/listarProduto', [ProdutoController::class, 'listarProduto'])->name('gerenciamento.produto');
     Route::post('/events/store', [ProdutoController::class, 'store'])->name('gerenciamento.produto.insere');
-    Route::get('/events/excluirProduto/{id}', [ProdutoController::class, 'delete'])->name('gerenciamento.produto.deleta');
+    Route::get('/events/excluirProduto/{id}', [ProdutoController::class, 'destroy'])->name('gerenciamento.produto.deleta');
     Route::post('/events/updateProduto', [ProdutoController::class, 'update'])->name('gerenciamento.produto.altera');
     Route::get('/events/cadastroProduto', [ProdutoController::class, 'cadastroProduto'])->name('gerenciamento.produto.formulario.insere');
     Route::get('/events/alterarProduto/{id}', [ProdutoController::class, 'alterarProduto'])->name('gerenciamento.produto.formulario.altera');

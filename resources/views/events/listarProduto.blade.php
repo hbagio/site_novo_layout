@@ -6,8 +6,9 @@
         <h1 class="titulo_grande cor_escuro_50">Produtos</h1><br>
         <div class="card flex_col">
            <div class="flex_row col_12">
-                <a href="/events/gerenciamento" class="card_acao muted col_6" style="margin-right:5px">Voltar</a>
                 <a href="/events/cadastroProduto" class="card_acao">Novo Produto</a>
+                <a href="/events/gerenciamento" class="card_acao muted col_6" style="margin-right:5px">Voltar</a>
+                <a href="/events/cadastroCategoria" class="card_acao muted col_6" style="margin-right:5px">Categorias</a>
            </div>
            <br>
             <table class="lista_consulta">

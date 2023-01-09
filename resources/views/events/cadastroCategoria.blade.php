@@ -5,13 +5,14 @@
     <div class="container">
         <h1 class="titulo_grande cor_escuro_50">Categoria</h1><br>
         <div class="card flex_col">
-            <a href="/events/gerenciamento" class="card_acao muted col_6">Voltar</a>
+
             <br>
             <form class="col_12" action="/events/insereCategoria" method="POST">
                 @csrf
                 <div class="container_campo">
+                    <label class="campo_label col_3">Descrição : </label>
                     <div class="campo">
-                        <input type="text" name="descricao" placeholder="Nova Categoria...">
+                        <input type="text" id="descricaoCategoria" name="descricaoCategoria"  required placeholder="Nova Categoria...">
                     </div>
                     <input class="campo_acao" type="submit" value="Cadastrar" />
                 </div>
@@ -36,6 +37,10 @@
                 </tr>
                 @endforeach
             </table>
+            <div class="flex_row col_12">
+            <a href="/events/gerenciamento" class="card_acao muted col_6">Voltar </a>
+            <a href="/events/listarProduto" class="card_acao muted col_6">Produtos</a>
+            </div>
         </div>
     </div>
 </section>
