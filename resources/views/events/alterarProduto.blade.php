@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <br>
-                <div class="container_campo col_10 campo_text_area" style="height: 5em;">
+                <div class="container_campo col_10 campo_text_area" style="height: 10em;">
                     <label class="campo_label col_3">Descrição</label>
                     <div class="campo">
                         <textarea name="descricao" rows="5" name="descricao" placeholder="Descrição detalhada do Produto">{{ $produto->descricao }}</textarea>
@@ -65,7 +65,12 @@
                     <div class="campo">
                         <input type="file" name="imagem">
                     </div>
+
                 </div>
+                <div >
+                    <p class="titulo_pequeno cor_escuro_50">Ao não informar uma nova imagem será mantido a antiga</p>
+                </div>
+
                 <br>
                 <input type="submit" class="card_acao col_10" value="Alterar"><br>
                 <a href="/events/listarProduto" class="card_acao muted col_5">Voltar</a>

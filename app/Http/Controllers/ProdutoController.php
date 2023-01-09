@@ -81,19 +81,6 @@ class ProdutoController extends Controller
         return redirect('events/listarProduto')->with('msg', 'Produto Cadastrado com Sucesso!');
     }
 
-    public function show($id)
-    {
-        $produto = Produto::findOrFail($id);
-        $categoria = Categoria::findOrFail($produto->idcategoria);
-
-        $retorno = DB::select('select whatsapp from informacoes where id = (select MAX(id) from informacoes)');
-        $whatsapp =  $retorno[0];
-        $numero =   preg_replace('/[^0-9]/', '', $whatsapp->whatsapp);
-        $url = 'https://wa.me/55' . $numero;
-
-        return view('events.visualizarProduto', ['produto' => $produto, 'categoria' => $categoria, 'url' => $url]);
-    }
-
     public function getDadosProduto($id)
     {
         $produto   = Produto::findOrFail($id);
@@ -102,7 +89,7 @@ class ProdutoController extends Controller
         $retorno = DB::select('select whatsapp from informacoes where id = (select MAX(id) from informacoes)');
         $whatsapp =  $retorno[0];
         $numero =   preg_replace('/[^0-9]/', '', $whatsapp->whatsapp);
-        $url = 'https://wa.me/55' . $numero;
+        $url = 'https://wa.me/55' . $numero. '?text=Ola! Tenho Interresse no Produto: ' . $produto->id . ' - ' . $produto->nome;
 
         return array(
             'nome' => $produto->nome,
@@ -173,28 +160,30 @@ class ProdutoController extends Controller
         $produto->valor = $request->valor;
         $produto->descricao = $request->descricao;
         $produto->destaque = $request->destaque;
-        $produtoOld = $produto->imagem;
 
         if ($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
+            $produtoOld = $produto->imagem;
+
             $requestImage = $request->imagem;
             $extensao = $requestImage->extension();
             $imagemNome = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extensao;
             $request->imagem->move(public_path('img/produtos'), $imagemNome);
             $produto->imagem = $imagemNome;
+
+            //Excluir a imagem antiga
+            $path = "img/produtos/";
+            $diretorio = dir($path);
+            while ($arquivo = $diretorio->read()) {
+                if (strpos($arquivo,  $produtoOld) !== false) {
+                    unlink($path . $arquivo);
+                }
+            }
+
+            $diretorio->close();
         }
 
         $produto->save();
 
-        //Excluir a imagem antiga
-        $path = "img/produtos/";
-        $diretorio = dir($path);
-
-        while ($arquivo = $diretorio->read()) {
-            if (strpos($arquivo,  $produtoOld) !== false) {
-                unlink($path . $arquivo);
-            }
-        }
-        $diretorio->close();
 
 
         $produtos = Produto::all();
