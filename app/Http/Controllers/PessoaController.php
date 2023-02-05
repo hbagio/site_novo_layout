@@ -5,24 +5,28 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Pessoa;
+use Illuminate\Support\Facades\DB;
 
 class PessoaController extends Controller
 {
-    public function consultaPessoas(){
-            $pessoas = Pessoa::all();
+    public function consultaPessoas()
+    {
 
-          return view('events.consultaPessoas',['pessoas'=>  $pessoas ]);
+        $pessoas = DB::table('pessoas')->orderBy('id', 'asc')->simplePaginate(20);
+
+        return view('events.consultaPessoas', ['pessoas' =>  $pessoas]);
     }
 
-    public function cadastrarPessoas(){
-        $pessoas = Pessoa::all();
+    public function cadastrarPessoas()
+    {
 
-      return view('events.cadastroPessoa');
-}
+        return view('events.cadastroPessoa');
+    }
 
 
 
-    public function incluirPessoas(Request $request){
+    public function incluirPessoas(Request $request)
+    {
 
         $pessoa = new Pessoa();
 
@@ -40,6 +44,5 @@ class PessoaController extends Controller
         $pessoa->save();
 
         return view('events.cadastroPessoa');
-  }
-
+    }
 }

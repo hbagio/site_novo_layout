@@ -56,6 +56,9 @@
                 </table>
             </div>
         </div>
+        <div class="produto_nome" style="text-align: center">
+            {{ $pessoas->links() }}
+        </div>
     </section>
 @endsection
 
