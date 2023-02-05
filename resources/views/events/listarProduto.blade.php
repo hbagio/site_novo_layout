@@ -44,5 +44,9 @@
                 </table>
             </div>
         </div>
+        <br>
+        <div class="produto_nome" style="text-align: center">
+            {{ $produtos->links() }}
+        </div>
     </section>
 @endsection

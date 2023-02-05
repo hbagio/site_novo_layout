@@ -43,7 +43,11 @@ class ProdutoController extends Controller
     public function listarProduto()
     {
         //pega os dados do model
-        $produtos = Produto::all()->simplePaginate(6);
+        $produtos = DB::table('produtos')
+                    ->orderBy('destaque', 'desc')
+                    //Executa com paginação
+                    ->simplePaginate(9);
+
         $categoria = Categoria::all();
         //retorna para aviwe
         return view('events.listarProduto', ['produtos' =>  $produtos, 'categorias' => $categoria]);
