@@ -146,3 +146,8 @@ body {
 .cor_escuro_25 {
     color: var(--cor_escuro_25);
 }
+.paginacao{
+    font-style: italic;
+    font-size: 10px;
+}
+

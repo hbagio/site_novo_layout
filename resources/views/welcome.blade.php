@@ -7,11 +7,18 @@
             @foreach ($produtos as $produto)
                 @include('/components/cardProduto')
             @endforeach
+            <div class="paginacao">
+                {{ $produtos->links() }}
+            </div>
 
         </div>
         @if (count($produtos) == 0)
-            <h3 class="card_titulo titulo_grande">Nehum produto encontrados para os filtros utilizados. <a href="/">Clique aqui para ver todos</a>  </h3>
+            <h3 class="card_titulo titulo_grande">Nehum produto encontrados para os filtros utilizados. <a
+                    href="/">Clique aqui para ver todos</a> </h3>
         @endif
     </section>
+
     @include('/components/modal')
+
+
 @endsection

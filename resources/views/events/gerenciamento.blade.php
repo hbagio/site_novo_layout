@@ -19,6 +19,10 @@
             <h1 class="card_titulo"><i class="fa-solid fa-user card_icone"></i>Usuário</h1>
             <a href="/events/consultaUsuario" class="card_acao titulo_medio"> Acessar</a>
         </div>
+        <div class="card animate grid_container_item flex_col">
+            <h1 class="card_titulo"><i class="fa-solid fa-user card_icone"></i>Clientes</h1>
+            <a href="/events/consultaPessoas" class="card_acao titulo_medio">Acessar</a>
+        </div>
     </div>
 </section>
 @endsection

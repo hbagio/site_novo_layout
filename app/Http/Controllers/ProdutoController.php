@@ -6,11 +6,8 @@ use Illuminate\Http\Request;
 //App tem de ser letra maiscula
 use App\Models\Produto;
 use App\Models\Categoria;
-use App\Models\Informacao;
-use Exception;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\File;
-use Illuminate\Contracts\Cache\Store;
+
 
 class ProdutoController extends Controller
 {
@@ -24,14 +21,17 @@ class ProdutoController extends Controller
             ->Join('categorias', 'categorias.id', '=', 'produtos.idcategoria')
             //Ordenação
             ->orderBy('destaque', 'desc')
-            //Executa
-            ->get();
+            //Executa com paginação
+            ->paginate(9);
+
 
 
         $categoria = Categoria::all();
         //retorna para aviwe
         return view('welcome', ['produtos' =>  $produtos, 'categorias' => $categoria]);
     }
+
+
 
     public function cadastroProduto()
     {
@@ -43,7 +43,7 @@ class ProdutoController extends Controller
     public function listarProduto()
     {
         //pega os dados do model
-        $produtos = Produto::all();
+        $produtos = Produto::all()->paginate(6);
         $categoria = Categoria::all();
         //retorna para aviwe
         return view('events.listarProduto', ['produtos' =>  $produtos, 'categorias' => $categoria]);
@@ -89,7 +89,7 @@ class ProdutoController extends Controller
         $retorno = DB::select('select whatsapp from informacoes where id = (select MAX(id) from informacoes)');
         $whatsapp =  $retorno[0];
         $numero =   preg_replace('/[^0-9]/', '', $whatsapp->whatsapp);
-        $url = 'https://wa.me/55' . $numero. '?text=Ola! Tenho Interresse no Produto: ' . $produto->id . ' - ' . $produto->nome;
+        $url = 'https://wa.me/55' . $numero . '?text=Ola! Tenho Interresse no Produto: ' . $produto->id . ' - ' . $produto->nome;
 
         return array(
             'nome' => $produto->nome,
@@ -107,26 +107,42 @@ class ProdutoController extends Controller
         $categoriaSelect = $request->categoriaSelect;
 
         if (strlen($filtro_pesquisa) > 0) {
-            $produtos = DB::select('Select produtos.*,
-                                        categorias.descricao as descricaoCategoria
-                                    from produtos
-                                    inner join categorias on
-                                    produtos.idcategoria = categorias.id
-                                    where nome like ?', ['%' . $filtro_pesquisa . '%']);
+
+            $produtos =  DB::table('produtos')
+                //Campos de deseja
+                ->select('produtos.*', 'categorias.descricao as descricaoCategoria')
+                //Join com a tabela e comparação
+                ->Join('categorias', 'categorias.id', '=', 'produtos.idcategoria')
+                //Ordenação
+                ->where('nome', 'LIKE', ['%'. $filtro_pesquisa . '%'])
+                ->orderBy('destaque', 'desc')
+                //Executa com paginação
+                ->paginate(9);
         } elseif ($categoriaSelect > 0) {
-            $produtos = DB::select('Select produtos.*,
-                                        categorias.descricao as descricaoCategoria
-                                    from produtos
-                                    inner join categorias on
-                                    produtos.idcategoria = categorias.id
-                                    where idcategoria  = ?', [$categoriaSelect]);
+
+            $produtos =  DB::table('produtos')
+                //Campos de deseja
+                ->select('produtos.*', 'categorias.descricao as descricaoCategoria')
+                //Join com a tabela e comparação
+                ->Join('categorias', 'categorias.id', '=', 'produtos.idcategoria')
+                //Ordenação
+                ->where('idcategoria', '=', [$categoriaSelect])
+
+                ->orderBy('destaque', 'desc')
+                //Executa com paginação
+                ->paginate(9);
         } else {
-            $produtos = DB::select('select produtos.*,
-                                           categorias.descricao as descricaoCategoria
-                                    from produtos
-                                    inner join categorias on
-                                        produtos.idcategoria = categorias.id
-                                    where idcategoria  >= ?', [0]);
+            $produtos =  DB::table('produtos')
+                //Campos de deseja
+                ->select('produtos.*', 'categorias.descricao as descricaoCategoria')
+                //Join com a tabela e comparação
+                ->Join('categorias', 'categorias.id', '=', 'produtos.idcategoria')
+                //Ordenação
+                ->where('idcategoria', '>=', [0])
+
+                ->orderBy('destaque', 'desc')
+                //Executa com paginação
+                ->paginate(9);
         }
 
         $categoria = Categoria::all();

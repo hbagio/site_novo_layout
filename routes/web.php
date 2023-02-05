@@ -5,6 +5,7 @@ use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\GerenciamentoController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PessoaController;
 use GuzzleHttp\Middleware;
 
 rotasMenuHome();
@@ -86,6 +87,7 @@ function rotasMenuGerenciamento()
     rotasProduto();
     rotasEmpresa();
     rotasUsuario();
+    rotasPessoa();
 }
 
 /**
@@ -142,4 +144,16 @@ function rotasUsuario()
     Route::get('events/excluirUsuario/{id}', [UserController::class, 'delete'])->name('gerenciamento.usuario.deleta');
     Route::get('/events/alterarUsuario/{id}', [UserController::class, 'alterarUsuario'])->name('gerenciamento.usuario.formulario.altera');
     Route::get('/inserirUsuario', [UserController::class, 'inserirUsuario'])->name('gerenciamento.usuario.formulario.insere');
+}
+
+function rotasPessoa()
+{
+    Route::get('/events/consultaPessoas', [PessoaController::class, 'consultaPessoas'])->name('gerenciamento.pessoa');
+    Route::get('/events/cadastrarPessoas', [PessoaController::class, 'cadastrarPessoas'])->name('gerenciamento.cadastrar_pessoa');
+    Route::post('/events/incluirPessoas', [PessoaController::class, 'incluirPessoas'])->name('gerenciamento.incluir_pessoa');
+    //Route::post('events/storeUsuario', [UserController::class, 'store'])->name('gerenciamento.usuario.insere');
+    //Route::post('/events/updateUsuario', [UserController::class, 'update'])->name('gerenciamento.usuario.altera');
+    //Route::get('events/excluirUsuario/{id}', [UserController::class, 'delete'])->name('gerenciamento.usuario.deleta');
+    //Route::get('/events/alterarUsuario/{id}', [UserController::class, 'alterarUsuario'])->name('gerenciamento.usuario.formulario.altera');
+    //Route::get('/inserirUsuario', [UserController::class, 'inserirUsuario'])->name('gerenciamento.usuario.formulario.insere');
 }
