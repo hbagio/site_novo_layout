@@ -22,7 +22,7 @@ class ProdutoController extends Controller
             //Ordenação
             ->orderBy('destaque', 'desc')
             //Executa com paginação
-            ->paginate(9);
+            ->simplePaginate(9);
 
 
 
@@ -43,7 +43,7 @@ class ProdutoController extends Controller
     public function listarProduto()
     {
         //pega os dados do model
-        $produtos = Produto::all()->paginate(6);
+        $produtos = Produto::all()->simplePaginate(6);
         $categoria = Categoria::all();
         //retorna para aviwe
         return view('events.listarProduto', ['produtos' =>  $produtos, 'categorias' => $categoria]);
@@ -117,7 +117,7 @@ class ProdutoController extends Controller
                 ->where('nome', 'LIKE', ['%'. $filtro_pesquisa . '%'])
                 ->orderBy('destaque', 'desc')
                 //Executa com paginação
-                ->paginate(9);
+                ->simplePaginate(9);
         } elseif ($categoriaSelect > 0) {
 
             $produtos =  DB::table('produtos')
@@ -130,7 +130,7 @@ class ProdutoController extends Controller
 
                 ->orderBy('destaque', 'desc')
                 //Executa com paginação
-                ->paginate(9);
+                ->simplePaginate(9);
         } else {
             $produtos =  DB::table('produtos')
                 //Campos de deseja
@@ -142,7 +142,7 @@ class ProdutoController extends Controller
 
                 ->orderBy('destaque', 'desc')
                 //Executa com paginação
-                ->paginate(9);
+                ->simplePaginate(9);
         }
 
         $categoria = Categoria::all();

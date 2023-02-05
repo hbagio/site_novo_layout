@@ -13,12 +13,12 @@
             <h3 class="card_titulo titulo_grande">Nehum produto encontrados para os filtros utilizados. <a
                     href="/">Clique aqui para ver todos</a> </h3>
         @endif
+        <br>
+        <div class="produto_nome" style="text-align: center">
+            {{ $produtos->links() }}
+        </div>
     </section>
 
-    {{-- Tratativa padrão para paginação Laravel --}}
-    <div >
-        {{ $produtos->links() }}
-    </div>
 
     @include('/components/modal')
 
