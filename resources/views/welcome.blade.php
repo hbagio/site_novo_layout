@@ -7,9 +7,6 @@
             @foreach ($produtos as $produto)
                 @include('/components/cardProduto')
             @endforeach
-            <div class="paginacao">
-                {{ $produtos->links() }}
-            </div>
 
         </div>
         @if (count($produtos) == 0)
@@ -17,6 +14,11 @@
                     href="/">Clique aqui para ver todos</a> </h3>
         @endif
     </section>
+
+    {{-- Tratativa padrão para paginação Laravel --}}
+    <div >
+        {{ $produtos->links() }}
+    </div>
 
     @include('/components/modal')
 
