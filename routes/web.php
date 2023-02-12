@@ -51,7 +51,7 @@ function rotasRedesSociais()
 function rotasMenuHome()
 {
     Route::get('/', [ProdutoController::class, 'index'])->name('home');
-    Route::post('/p', [ProdutoController::class, 'buscaComCategoria'])->name('home.ajax.filtraCategoria');
+    Route::get('/p', [ProdutoController::class, 'buscaComCategoria'])->name('home.ajax.filtraCategoria');
     Route::get('/getDadosProduto/{id}', [ProdutoController::class, 'getDadosProduto'])->name('home.ajax.getDadosProduto');
     Route::get('/events/detalhes/{id}', [ProdutoController::class, 'show']);
 }

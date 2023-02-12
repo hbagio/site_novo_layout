@@ -19,7 +19,7 @@
 
         <div class="div_paginacao">
             <a class="link_paginacao" href="/">Primeira</a>
-            <a disabled class="link_paginacao" href="{{ $produtos->previousPageUrl() }}">Anterior</a>
+            <a disabled class="link_paginacao" href="{{$produtos->previousPageUrl() }}">Anterior</a>
             <a class="link_paginacao" href="{{ $produtos->nextPageUrl() }}">Próxima</a>
             <a class="link_paginacao" href="{{ $produtos->url($produtos->lastPage()) }}">Última</a>
         </div>

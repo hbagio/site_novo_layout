@@ -1,5 +1,5 @@
 <div class="toolbar">
-        <form class="container flex_row menu_fechado" id="menu_filtro_mobile" action="/p" method="POST" enctype="multipart/form-data">
+        <form class="container flex_row menu_fechado" id="menu_filtro_mobile" action="/p" method="GET" enctype="multipart/form-data">
             @csrf
            <div class="container_campo col_4">
                 <label for="filtro_categoria" class="campo_label col_6">Categoria</label>

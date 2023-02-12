@@ -45,10 +45,16 @@ class ProdutoController extends Controller
     public function listarProduto()
     {
         //pega os dados do model
-        $produtos = DB::table('produtos')
-                    ->orderBy('destaque', 'desc')
-                    //Executa com paginação
-                    ->Paginate(REGISTROS_POR_PAGINA);
+        //pega os dados do model
+        $produtos  = DB::table('produtos')
+            //Campos de deseja
+            ->select('produtos.*', 'categorias.descricao as descricaoCategoria')
+            //Join com a tabela e comparação
+            ->Join('categorias', 'categorias.id', '=', 'produtos.idcategoria')
+            //Ordenação
+            ->orderBy('destaque', 'desc')
+            //Executa com paginação
+            ->Paginate(REGISTROS_POR_PAGINA);
 
         $categoria = Categoria::all();
         //retorna para aviwe
@@ -120,7 +126,7 @@ class ProdutoController extends Controller
                 //Join com a tabela e comparação
                 ->Join('categorias', 'categorias.id', '=', 'produtos.idcategoria')
                 //Ordenação
-                ->where('nome', 'LIKE', ['%'. $filtro_pesquisa . '%'])
+                ->where('nome', 'LIKE', ['%' . $filtro_pesquisa . '%'])
                 ->orderBy('destaque', 'desc')
                 //Executa com paginação
                 ->Paginate(REGISTROS_POR_PAGINA);
@@ -208,8 +214,8 @@ class ProdutoController extends Controller
 
 
 
-        $produtos = Produto::all();
+        $produtos = Produto::Paginate(REGISTROS_POR_PAGINA);
         //retorna para aviwe
-        return view('events.listarProduto', ['produtos' =>  $produtos]);
+        return redirect('/events/listarProduto');
     }
 }
