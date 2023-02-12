@@ -147,4 +147,35 @@ body {
     color: var(--cor_escuro_25);
 }
 
+.link_paginacao {
+    color: var(--cor_primaria);
+    background: rgba(var(--cor_primaria_rgb),.1);
+    color: var(--cor_primaria);
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 5px 10px;
+    width: 100%;
+    text-align: center;
+}
 
+.div_paginacao{
+    width: var(--perc_full);
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+    color: var(--cor_primaria);
+    font-weight: bold
+}
+.spa_pagincacao{
+    color: var(--cor_primaria);
+    background: rgba(var(--cor_primaria_rgb),.1);
+    color: var(--cor_primaria);
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 5px 10px;
+    width: 100%;
+    text-align: center;
+}
+a[disabled="disabled"] {
+    pointer-events: none;
+}

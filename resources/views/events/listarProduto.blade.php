@@ -46,7 +46,16 @@
         </div>
         <br>
         <div class="produto_nome" style="text-align: center">
-            {{ $produtos->links() }}
+            <div class="div_paginacao">
+                <a class="link_paginacao" href="/events/listarProduto">Primeira</a>
+                <a disabled class="link_paginacao" href="{{ $produtos->previousPageUrl() }}">Anterior</a>
+                <a class="link_paginacao" href="{{ $produtos->nextPageUrl() }}">Próxima</a>
+                <a class="link_paginacao" href="{{ $produtos->url($produtos->lastPage()) }}">Última</a>
+            </div>
+            <div class="div_paginacao">
+                <p>Página {{ $produtos->currentPage() }} de {{ $produtos->lastPage() }}.</p>
+            </div>
+            <br>
         </div>
     </section>
 @endsection

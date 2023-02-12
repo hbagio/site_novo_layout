@@ -8,9 +8,11 @@ use App\Models\Produto;
 use App\Models\Categoria;
 use Illuminate\Support\Facades\DB;
 
-
+const  REGISTROS_POR_PAGINA = 12;
 class ProdutoController extends Controller
 {
+
+
     public function index()
     {
         //pega os dados do model
@@ -22,7 +24,7 @@ class ProdutoController extends Controller
             //Ordenação
             ->orderBy('destaque', 'desc')
             //Executa com paginação
-            ->simplePaginate(9);
+            ->Paginate(REGISTROS_POR_PAGINA);
 
 
 
@@ -46,7 +48,7 @@ class ProdutoController extends Controller
         $produtos = DB::table('produtos')
                     ->orderBy('destaque', 'desc')
                     //Executa com paginação
-                    ->simplePaginate(9);
+                    ->Paginate(REGISTROS_POR_PAGINA);
 
         $categoria = Categoria::all();
         //retorna para aviwe
@@ -121,7 +123,7 @@ class ProdutoController extends Controller
                 ->where('nome', 'LIKE', ['%'. $filtro_pesquisa . '%'])
                 ->orderBy('destaque', 'desc')
                 //Executa com paginação
-                ->simplePaginate(9);
+                ->Paginate(REGISTROS_POR_PAGINA);
         } elseif ($categoriaSelect > 0) {
 
             $produtos =  DB::table('produtos')
@@ -134,7 +136,7 @@ class ProdutoController extends Controller
 
                 ->orderBy('destaque', 'desc')
                 //Executa com paginação
-                ->simplePaginate(9);
+                ->Paginate(REGISTROS_POR_PAGINA);
         } else {
             $produtos =  DB::table('produtos')
                 //Campos de deseja
@@ -146,7 +148,7 @@ class ProdutoController extends Controller
 
                 ->orderBy('destaque', 'desc')
                 //Executa com paginação
-                ->simplePaginate(9);
+                ->Paginate(REGISTROS_POR_PAGINA);
         }
 
         $categoria = Categoria::all();
