@@ -50,9 +50,33 @@
             </div>
             <br>
             <div class="container_campo col_10">
-                <label class="campo_label col_3">Imagem</label>
+                <label class="campo_label col_3">Imagem Principal</label>
                 <div class="campo">
                     <input type="file" name="imagem" required>
+                </div>
+            </div>
+            <div class="container_campo col_10">
+                <label class="campo_label col_3">Imagem 2</label>
+                <div class="campo">
+                    <input type="file" name="imagem2" >
+                </div>
+            </div>
+            <div class="container_campo col_10">
+                <label class="campo_label col_3">Imagem 3</label>
+                <div class="campo">
+                    <input type="file" name="imagem3" >
+                </div>
+            </div>
+            <div class="container_campo col_10">
+                <label class="campo_label col_3">Imagem 4</label>
+                <div class="campo">
+                    <input type="file" name="imagem4" >
+                </div>
+            </div>
+            <div class="container_campo col_10">
+                <label class="campo_label col_3">Imagem 5</label>
+                <div class="campo">
+                    <input type="file" name="imagem5" >
                 </div>
             </div>
             <br>

@@ -1,5 +1,6 @@
 <dialog id="modal_produto">
-    <button id="modal_produto_acao_fechar" onclick="Principal.fechaModalProduto()"><i class="fa-regular fa-circle-xmark"></i></button>
+    <button id="modal_produto_acao_fechar" onclick="Principal.fechaModalProduto()">
+        <i class="fa-regular fa-circle-xmark"></i></button>
     <div class="container">
         <img src="" alt="">
         <main class="modal_produto_info">
