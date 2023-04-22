@@ -12,6 +12,29 @@
 } .produto:hover {
     transform: translateY(-5px);
 }
+/*----------------------------*/
+.box {
+    display : flex;
+   flex-direction : row;
+
+
+ }
+
+
+ .box .box-cell.box1 {
+    width: 500px;
+    height: 500px;
+  }
+ .box .box-cell.box2 {
+    width:  500px;
+    height:  500px;
+ }
+
+
+
+
+
+/*-------------------------------------------*/
 
 .produto_imagem {
     border-radius: .5em .5em 0 0;

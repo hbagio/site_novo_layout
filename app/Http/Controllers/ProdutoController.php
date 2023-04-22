@@ -81,16 +81,36 @@ class ProdutoController extends Controller
         //Upload controle
         //Verifica se tem uma imagem da requisição e se ela é valida
         if ($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
-            $requestImage = $request->imagem;
-            $extensao = $requestImage->extension();
-            $imagemNome = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extensao;
-            $request->imagem->move(public_path('img/produtos'), $imagemNome);
-            $produto->imagem = $imagemNome;
+            $produto->imagem = $this->validaImagem($request->imagem);
+        }
+
+        if ($request->hasFile('imagem2') && $request->file('imagem2')->isValid()) {
+            $produto->imagem2 = $this->validaImagem($request->imagem2);
+        }
+
+        if ($request->hasFile('imagem3') && $request->file('imagem3')->isValid()) {
+            $produto->imagem3 = $this->validaImagem($request->imagem3);
+        }
+
+        if ($request->hasFile('imagem4') && $request->file('imagem4')->isValid()) {
+            $produto->imagem4 = $this->validaImagem($request->imagem4);
+        }
+
+        if ($request->hasFile('imagem5') && $request->file('imagem5')->isValid()) {
+            $produto->imagem5 = $this->validaImagem($request->imagem5);
+
         }
 
         $produto->save();
 
         return redirect('events/listarProduto')->with('msg', 'Produto Cadastrado com Sucesso!');
+    }
+
+    public function validaImagem($imagem){
+            $extensao = $imagem->extension();
+            $imagemNome = md5($imagem->getClientOriginalName() . strtotime("now")) . "." . $extensao;
+            $imagem->move(public_path('img/produtos'), $imagemNome);
+            return $imagemNome;
     }
 
     public function getDadosProduto($id)
@@ -161,6 +181,19 @@ class ProdutoController extends Controller
 
 
         return view('welcome', ['produtos' => $produtos, 'categorias' => $categoria]);
+    }
+
+    public function show($id)
+    {
+        $produto = Produto::findOrFail($id);
+        $categoria = Categoria::findOrFail($produto->idcategoria);
+
+        $retorno = \DB::select('select whatsapp  from informacoes where id = (select MAX(id) from informacoes)');
+        $whatsapp =  $retorno[0];
+        $numero =   preg_replace('/[^0-9]/', '', $whatsapp->whatsapp);
+        $url = 'https://wa.me/55' . $numero;
+
+        return view('events.visualizarProduto', ['produto' => $produto, 'categoria' => $categoria, 'url' => $url]);
     }
 
     public function destroy($id)
