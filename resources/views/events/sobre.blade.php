@@ -17,7 +17,8 @@
             <div class="container_campo col_10">
                 <label class="campo_label col_4">Razão Social</label>
                 <h4 class="campo">{{ $dadosEmpresa->nomeempresa }}</h4>
-            </div><br>
+            </div>
+            <br>
             <div class="container_campo col_10">
                 <label class="campo_label col_4"><i class="fa-brands fa-instagram"></i> Instagram</label>
                 <span class="campo">
