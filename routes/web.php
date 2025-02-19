@@ -153,7 +153,7 @@ function rotasPessoa()
     Route::post('/events/incluirPessoas', [PessoaController::class, 'incluirPessoas'])->name('gerenciamento.incluir_pessoa');
     //Route::post('events/storeUsuario', [UserController::class, 'store'])->name('gerenciamento.usuario.insere');
     //Route::post('/events/updateUsuario', [UserController::class, 'update'])->name('gerenciamento.usuario.altera');
-    //Route::get('events/excluirUsuario/{id}', [UserController::class, 'delete'])->name('gerenciamento.usuario.deleta');
+    Route::get('/events/excluirPessoa/{id}', [PessoaController::class, 'delete'])->name('gerenciamento.pessoa.deleta');
     //Route::get('/events/alterarUsuario/{id}', [UserController::class, 'alterarUsuario'])->name('gerenciamento.usuario.formulario.altera');
     //Route::get('/inserirUsuario', [UserController::class, 'inserirUsuario'])->name('gerenciamento.usuario.formulario.insere');
 }

@@ -3,12 +3,11 @@
 @section('content')
     <section class="galeria">
         <div class="container">
-            <h1 class="titulo_grande cor_escuro_50">Produtos</h1><br>
+            <h1 class="titulo_grande cor_escuro_50">Clientes</h1><br>
             <div class="card flex_col">
                 <div class="flex_row col_12">
-                    <a href="cadastrarPessoas" class="card_acao">Cadastrar Cliente</a>
+                    <a href="cadastrarPessoas" class="card_acao  col_6">Cadastrar Cliente</a>
                     <a href="/events/gerenciamento" class="card_acao muted col_6" style="margin-right:5px">Voltar</a>
-                    <a href="/events/cadastroCategoria" class="card_acao muted col_6" style="margin-right:5px">Categorias</a>
                 </div>
                 <br>
                 <table class="lista_consulta">

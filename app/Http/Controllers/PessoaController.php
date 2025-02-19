@@ -40,9 +40,15 @@ class PessoaController extends Controller
         $pessoa->tipo = $request->tipo;
         $pessoa->cidade = $request->cidade;
         $pessoa->email = $request->email;
-
         $pessoa->save();
 
         return view('events.cadastroPessoa');
+    }
+
+    public function delete ($id){
+
+        $pessoa =  Pessoa::findOrFail($id);
+        $pessoa -> delete();
+        return back()->with('msg', 'Cliente excluido com sucesso!');;
     }
 }
