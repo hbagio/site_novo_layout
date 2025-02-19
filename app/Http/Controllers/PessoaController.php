@@ -41,7 +41,6 @@ class PessoaController extends Controller
         $pessoa->cidade = $request->cidade;
         $pessoa->email = $request->email;
         $pessoa->save();
-
         return view('events.cadastroPessoa');
     }
 
