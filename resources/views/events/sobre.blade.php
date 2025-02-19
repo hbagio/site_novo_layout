@@ -3,15 +3,20 @@
 @section('content')
 <section class="galeria flex_col">
     <div class="container">
-        <h1 class="titulo_grande cor_escuro_50">Informações Sobre a Empresa</h1><br> 
+        <h1 class="titulo_grande cor_escuro_50">Informações Sobre a Empresa</h1><br>
         <article class="card flex_col">
             <div class="card_titulo titulo_grande" style="filter: grayscale(100%) opacity(.3);">
                 @include('/components/logo', ['firstName' => 'fazendo', 'secondName' => 'festa', 'cssClass' => ''])
             </div>
-            <br> 
+            <br>
             <div class="container_campo col_10">
                 <label class="campo_label col_4">CNPJ</label>
                 <h4 class="campo">{{ $dadosEmpresa->cnpj }}</h4>
+            </div>
+            <br>
+            <div class="container_campo col_10">
+                <label class="campo_label col_4">Razão Social</label>
+                <h4 class="campo">{{ $dadosEmpresa->nomeempresa }}</h4>
             </div>
             <br>
             <div class="container_campo col_10">
