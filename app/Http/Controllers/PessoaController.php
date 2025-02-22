@@ -48,6 +48,16 @@ class PessoaController extends Controller
 
         $pessoa =  Pessoa::findOrFail($id);
         $pessoa -> delete();
-        return back()->with('msg', 'Cliente excluido com sucesso!');;
+        return back()->with('msg', 'Cliente excluido com sucesso!');
     }
+
+    public function alterar ($id){
+
+        $pessoa =  Pessoa::findOrFail($id);
+
+        return view('events/alterarPessoa', ['pessoa' => $pessoa]);
+
+
+    }
+
 }

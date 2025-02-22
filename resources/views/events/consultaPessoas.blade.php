@@ -44,7 +44,7 @@
                             <td> {{ $pessoa->email}} </td>
                             <td>
                                 <div class="flex_col">
-                                    <a class="lista_consulta_acao editar" href="/events/alterarPessoa/{{ $pessoa->id }}"
+                                    <a class="lista_consulta_acao editar" href="/events/alterar/{{ $pessoa->id }}"
                                         role="button">Editar <i class="fa-solid fa-pen"></i></a>
                                     <a class="lista_consulta_acao excluir" href="/events/excluirPessoa/{{ $pessoa->id }}"
                                         role="button">Excluir <i class="fa-solid fa-trash"></i></a>
