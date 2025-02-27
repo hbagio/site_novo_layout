@@ -119,6 +119,8 @@ class UserController extends Controller
             $usuario->email = $request->email;
             $usuario->password = bcrypt($request->password);
             $usuario->save();
+            $usuarios = User::all();
+            return view('events.consultaUsuario', ['usuarios' => $usuarios]);
         }
     }
 
