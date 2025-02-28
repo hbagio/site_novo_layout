@@ -37,7 +37,7 @@
     border-radius: 5px;
     font-weight: bold;
     padding: 5px 10px;
-    width: 100%;
+    width: 30%;
 } 
 .lista_consulta_acao.editar {
     color: var(--cor_sucesso);
@@ -46,4 +46,8 @@
 .lista_consulta_acao.excluir {
     color: var(--cor_erro);
     background: var(--cor_erro_25);
+}
+.lista_consulta_acao.visualizar {
+    color: var(--cor_sucesso);
+    background: var(--cor_sucesso_25);
 }

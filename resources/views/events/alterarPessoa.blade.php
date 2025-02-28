@@ -4,13 +4,24 @@
     <section class="galeria">
         <div class="container">
             <h1 class="titulo_grande cor_escuro_50">Alterar Pessoa</h1><br>
-            <form class="card flex_col col_12" action="/events/alterarPessoas" method="POST" enctype="multipart/form-data">
+            <form class="card flex_col col_12" action="/events/updatePessoa/" method="POST" enctype="multipart/form-data">
                 {{-- Diretiva necessário por segurança, senão não deixar fazer o request --}}
                 @csrf
+
+                <div class="container_campo col_10">
+                    <label class="campo_label col_3">Código</label>
+                    <div class="campo">
+                        <input type="text" class="form-control" name="codigo" id="codigo" value="{{ $pessoa->id }}"
+                             readonly required>
+                    </div>
+                </div>
+                <br>
+
                 <div class="container_campo col_10">
                     <label class="campo_label col_3">Nome</label>
                     <div class="campo">
-                        <input type="text" class="form-control" name="nome" id="nome" value="{{$pessoa->nome}}" required>
+                        <input type="text" class="form-control" name="nome" id="nome" value="{{ $pessoa->nome }}"
+                            required>
                     </div>
                 </div>
                 <br>
@@ -19,8 +30,8 @@
                     <label class="campo_label col_3">Tipo</label>
                     <div class="campo">
 
-                    <input name="tipo" style="text-align: left" readonly 
-                        @switch($pessoa->tipo)
+                        <input name="tipo" style="text-align: left" readonly
+                            @switch($pessoa->tipo)
                             @case(0)
                                 value= 'Fisica'
                                 @break
@@ -29,7 +40,7 @@
                                 @break
                             @default     
                         @endswitch
-                     required>
+                            required>
 
                     </div>
                 </div>
@@ -38,21 +49,24 @@
                 <div class="container_campo col_10">
                     <label class="campo_label col_3">Cpf/Cnpj</label>
                     <div class="campo">
-                        <input type="text" class="form-control"name="cpfcnpj" id="cpfcnpj" value="{{$pessoa->cpfcnpj}}" required>
+                        <input type="text" class="form-control"name="cpfcnpj" id="cpfcnpj"
+                            value="{{ $pessoa->cpfcnpj }}" required>
                     </div>
                 </div>
                 <br>
                 <div class="container_campo col_10">
                     <label class="campo_label col_3">Endereço</label>
                     <div class="campo">
-                        <input type="text" class="form-control"name="endereco" id="endereco" value="{{$pessoa->endereco}}" required >
+                        <input type="text" class="form-control"name="endereco" id="endereco"
+                            value="{{ $pessoa->endereco }}" required>
                     </div>
                 </div>
                 <br>
                 <div class="container_campo col_10">
                     <label class="campo_label col_3">Cep</label>
                     <div class="campo">
-                        <input type="text" class="form-control"name="cep" id="cep" value="{{$pessoa->cpfcnpj}}" required>
+                        <input type="text" class="form-control"name="cep" id="cep" value="{{ $pessoa->cpfcnpj }}"
+                            required>
                     </div>
                 </div>
                 <br>
@@ -60,14 +74,16 @@
                 <div class="container_campo col_10">
                     <label class="campo_label col_3">Bairro</label>
                     <div class="campo">
-                        <input type="text" class="form-control"name="bairro" id="bairro" value="{{$pessoa->bairro}}" required>
+                        <input type="text" class="form-control"name="bairro" id="bairro" value="{{ $pessoa->bairro }}"
+                            required>
                     </div>
                 </div>
                 <br>
                 <div class="container_campo col_10">
                     <label class="campo_label col_3">Cidade</label>
                     <div class="campo">
-                        <input type="text" class="form-control"name="cidade" id="cidade" value="{{$pessoa->cidade}}" required>
+                        <input type="text" class="form-control"name="cidade" id="cidade" value="{{ $pessoa->cidade }}"
+                            required>
                     </div>
                 </div>
                 <br>
@@ -76,6 +92,7 @@
                     <div class="campo">
                         <div class="campo">
                             <select name="estado" style="text-align: left" required>
+                                <option value="{{$pessoa->estado}}">{{$pessoa->estado}}</option>
                                 <option value="AC">AC - Acre</option>
                                 <option value="AL">AL - Alagoas</option>
                                 <option value="AP">AP - Amapá</option>
@@ -110,22 +127,25 @@
                 <div class="container_campo col_10">
                     <label class="campo_label col_3">Telefone</label>
                     <div class="campo">
-                        <input type="text" class="form-control"name="telefone" id="telefone" required placeholder="Telefone da Pessoa">
+                        <input type="text" class="form-control"name="telefone" id="telefone" required
+                            value="{{ $pessoa->telefone }}">
                     </div>
                 </div>
                 <br>
                 <div class="container_campo col_10">
                     <label class="campo_label col_3">Email</label>
                     <div class="campo">
-                        <input type="email" class="form-control"name="email" id="email" required placeholder="Email da Pessoa">
+                        <input type="email" class="form-control"name="email" id="email" required
+                            value="{{ $pessoa->email }}"">
                     </div>
                 </div>
 
                 <br>
-                    <input type="submit" class="card_acao col_10" value="Cadastrar">
-                    <br>
-                    <a class="card_acao muted col_5" href="/events/consultaPessoas" style="margin-right:5px">Voltar</a>
 
+                <div class="flex_row col_10">
+                    <input type="submit" class="card_acao" value="Alterar">
+                    <a class="card_acao muted " href="/events/consultaPessoas" style="margin-right:5px">Voltar</a>
+                </div>
 
             </form>
         </div>

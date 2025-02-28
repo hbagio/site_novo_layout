@@ -23,6 +23,25 @@ class PessoaController extends Controller
         return view('events.cadastroPessoa');
     }
 
+    public function update(Request $request)
+    {
+        echo($request->codigo);
+        
+        $pessoa = Pessoa::findOrFail($request->codigo);
+        echo($request->codigo);
+        $pessoa->nome = $request->nome;
+        $pessoa->cpfcnpj = $request->cpfcnpj;
+        $pessoa->endereco =  $request->endereco;
+        $pessoa->bairro = $request->bairro  ;
+        $pessoa->cidade = $request->cidade;
+        $pessoa->estado = $request->estado;
+        $pessoa->telefone =  $request->telefone;
+        $pessoa->email =  $request->email;
+        $pessoa->save();
+
+         return redirect('/events/consultaPessoas')->with('msg', 'Usuário alterado com sucesso!');
+
+    }
 
 
     public function incluirPessoas(Request $request)
@@ -44,20 +63,23 @@ class PessoaController extends Controller
         return view('events.cadastroPessoa');
     }
 
-    public function delete ($id){
+    public function delete($id)
+    {
 
         $pessoa =  Pessoa::findOrFail($id);
-        $pessoa -> delete();
+        $pessoa->delete();
         return back()->with('msg', 'Cliente excluido com sucesso!');
     }
 
-    public function alterar ($id){
+
+
+    public function alterar($id)
+    {
 
         $pessoa =  Pessoa::findOrFail($id);
 
+        
+
         return view('events/alterarPessoa', ['pessoa' => $pessoa]);
-
-
     }
-
 }
