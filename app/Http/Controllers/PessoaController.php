@@ -11,9 +11,7 @@ class PessoaController extends Controller
 {
     public function consultaPessoas()
     {
-
         $pessoas = DB::table('pessoas')->orderBy('id', 'asc')->simplePaginate(20);
-
         return view('events.consultaPessoas', ['pessoas' =>  $pessoas]);
     }
 
@@ -26,7 +24,7 @@ class PessoaController extends Controller
     public function update(Request $request)
     {
         echo($request->codigo);
-        
+
         $pessoa = Pessoa::findOrFail($request->codigo);
         echo($request->codigo);
         $pessoa->nome = $request->nome;
@@ -39,7 +37,7 @@ class PessoaController extends Controller
         $pessoa->email =  $request->email;
         $pessoa->save();
 
-         return redirect('/events/consultaPessoas')->with('msg', 'Usuário alterado com sucesso!');
+         return redirect('/events/consultaPessoas')->with('msg', 'Registro alterado com sucesso!');
 
     }
 
@@ -78,7 +76,7 @@ class PessoaController extends Controller
 
         $pessoa =  Pessoa::findOrFail($id);
 
-        
+
 
         return view('events/alterarPessoa', ['pessoa' => $pessoa]);
     }
