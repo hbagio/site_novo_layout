@@ -1,6 +1,6 @@
 <footer>
         <div class="container flex_row">
-            @include('/components/logo', ['firstName' => 'Remédio', 'secondName' => 'Fácil', 'cssClass' => ''])
+            @include('/components/logo', ['firstName' => 'Fazendo', 'secondName' => 'Festa', 'cssClass' => ''])
             <p>2022© Fazendo Festa - Direitos Reservados www.fazendofestavp.com.br</p>
             <div class="redes_sociais flex_row">
                 <a class="centralize_item" href="/whatsapp" target="_blank"><i class="fa-brands fa-whatsapp fa-2x"></i></a>
